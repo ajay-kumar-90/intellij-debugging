@@ -73,19 +73,17 @@ public class IJ_Debugger_Advanced {
         }
         static List<Integer> work() throws InterruptedException {
             final List<Integer> list = Collections.synchronizedList(new ArrayList<>());
-            Thread thread = new Thread(() -> addIfAbsent(list, 17), "T1");
+            Thread thread = new Thread(() -> addIfAbsent(list, 17), "T1"); // Thread T1
             thread.start();
-            addIfAbsent(list, 17);
+            addIfAbsent(list, 17); // Main Thread
             thread.join();
             System.out.println("Elements : " + list);
             return list;
         }
         static void addIfAbsent(List<Integer> list, int x) {
-            synchronized (list){
-                if (!list.contains(x)) {
-                    validateRange(x);
-                    list.add(x);
-                }
+            if (!list.contains(x)) {
+                validateRange(x);
+                list.add(x);
             }
         }
 
