@@ -1,5 +1,6 @@
 package com.ajaycodes.debugger.advanced;
 
+import com.ajaycodes.debugger.advanced.my.Somewhere;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -139,4 +140,25 @@ public class IJ_Debugger_Advanced {
             }
         }
     }
+
+    /**
+     * <h2>Breakpoint types</h2>
+     * <li>Method, entry and or exit</li>
+     * <li>Wildcard method (any method in the</li>
+     * project, class, in main, all methods)
+     */
+    public static class MethodBpt {
+        public static void main(String[] args) {
+            MethodBpt.BaseInterface o = Somewhere.getObject();
+            System.out.println(o.boo());
+        }
+        public interface BaseInterface {
+            String foo();
+            String boo();
+        }
+    }
+
+
+    
+
 }
