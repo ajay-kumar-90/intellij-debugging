@@ -4,10 +4,7 @@ import com.ajaycodes.debugger.advanced.my.Somewhere;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 public class IJ_Debugger_Advanced {
 
@@ -158,6 +155,60 @@ public class IJ_Debugger_Advanced {
         }
     }
 
+    /**
+     * <h2>Breakpoint types</h2>
+     * <li>Field</li>
+     * <li>Fun: select all occurrences</li>
+     */
+    public static class FieldBpt {
+
+        private int var = new Random().nextInt(100);
+
+        public static void main(String[] args) {
+            FieldBpt field = new FieldBpt();
+            Somewhere.doSomething(field);
+            if (field.var>5) {
+                System.out.println("Big");
+            }
+        }
+
+        public void foo() {
+            this.var = 1;
+        }
+
+        public void boo() {
+            this.var = 2;
+        }
+
+        public void goo() {
+            this.var = 3;
+        }
+
+        public void zoo() {
+            this.var = 2;
+        }
+
+        public void doo() {
+            this.var = 10;
+        }
+
+        public void moo() {
+            this.var = 6;
+        }
+
+        public void too() {
+            this.var = 6;
+        }
+
+        public void koo() {
+            this.var = 8;
+        }
+
+        public void yoo() {
+            this.var = 9;
+        }
+
+    }
 
     
 
