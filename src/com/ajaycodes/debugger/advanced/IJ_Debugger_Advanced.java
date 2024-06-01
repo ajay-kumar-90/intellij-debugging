@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -93,6 +94,48 @@ public class IJ_Debugger_Advanced {
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
+            }
+        }
+    }
+
+    /**
+     * <h2>Breakpoint settings</h2>
+     * <li>Filters</li>
+     * <li>Intentions</li>
+     */
+    public static class Human {
+        private final String name;
+        private int age;
+
+        public Human(String name) {
+            this.name = name;
+        }
+
+        public static void main(String[] args) {
+            List<Human> humans = Arrays.asList(
+                    new Man("Paul"),
+                    new Woman("Marry"),
+                    new Man("Max"));
+            for (int i = 0; i < 10; i++) {
+                for (Human human : humans) {
+                    human.inc();
+                }
+            }
+        }
+
+        private void inc() {
+            age++;
+        }
+
+        static class Man extends Human {
+            public Man(String name) {
+                super(name);
+            }
+        }
+
+        static class Woman extends Human {
+            public Woman(String name) {
+                super(name);
             }
         }
     }
