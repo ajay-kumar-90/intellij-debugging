@@ -210,6 +210,25 @@ public class IJ_Debugger_Advanced {
 
     }
 
+    /**
+     * <h2>Breakpoint types</h2>
+     * <li>Exception (any exception, caught/uncaught)</li>
+     * <li>Catch class filter</li>
+     */
+    public static class ExceptionBpt {
+        public static void main(String[] args) {
+            Somewhere.doSomething();
+            for (int i = 0; i < 20; i++) {
+                try {
+                    Somewhere.doSomethingWithException();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+            int a = 1 / 0;
+        }
+    }
+
     
 
 }

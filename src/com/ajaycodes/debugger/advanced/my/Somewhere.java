@@ -38,13 +38,22 @@ public class Somewhere {
         }
     }
 
+    public static int doSomething() {
+        try {
+            return doSomethingWithException();
+        } catch (Exception e) {
+            System.out.println("Ignored : " + e);
+        }
+        return 0;
+    }
+
     public static IJ_Debugger_Advanced.MethodBpt.BaseInterface getObject() {
         Clazz3 obj = new Clazz3();
         doSomething(obj);
         return obj;
     }
 
-    static void doSomething(Object obj) {
+    public static void doSomething(Object obj) {
         try {
             obj.getClass().getMethod("foo").invoke(obj);
         } catch (IllegalAccessException e) {
@@ -55,6 +64,26 @@ public class Somewhere {
             e.printStackTrace();
         }
     }
+
+    public static int doSomethingWithException() {
+        Object a = null;
+        Object b = new Object();
+        int x = 1, y = 0, z = Integer.MAX_VALUE;
+        switch (new Random().nextInt(5)) {
+            case 0:
+                return Math.floorDiv(x, y);
+            case 1:
+                return a.hashCode();
+            case 2:
+                return Math.incrementExact(z);
+            case 3:
+                return Integer.parseInt("xxx");
+            case 4:
+                return ((String) b).length();
+        }
+        return 0;
+    }
+
     public static class Clazz1 implements IJ_Debugger_Advanced.MethodBpt.BaseInterface {
 
         @Override
