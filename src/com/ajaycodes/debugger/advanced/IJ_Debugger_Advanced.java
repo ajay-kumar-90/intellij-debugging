@@ -4,6 +4,7 @@ import com.ajaycodes.debugger.advanced.my.Somewhere;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.io.IOException;
 import java.util.*;
 
 public class IJ_Debugger_Advanced {
@@ -32,6 +33,7 @@ public class IJ_Debugger_Advanced {
             }
         }
     }
+
     /**
      * <h2>Break point Settings</h2>
      * <li>Dependent breakpoints</li>
@@ -42,6 +44,7 @@ public class IJ_Debugger_Advanced {
             warmup();
             realWork();
         }
+
         static void warmup() {
             for (int i = 0; i < 10; i++) {
                 work();
@@ -53,6 +56,7 @@ public class IJ_Debugger_Advanced {
                 work();
             }
         }
+
         private static void work() {
             // do something
             int a = 5;
@@ -66,10 +70,6 @@ public class IJ_Debugger_Advanced {
      */
     public static class ConcurrencyTest {
 
-        @Test
-        public void main() throws InterruptedException {
-            Assertions.assertSame(1, work().size());
-        }
         static List<Integer> work() throws InterruptedException {
             final List<Integer> list = Collections.synchronizedList(new ArrayList<>());
             Thread thread = new Thread(() -> addIfAbsent(list, 17), "T1"); // Thread T1
@@ -79,6 +79,7 @@ public class IJ_Debugger_Advanced {
             System.out.println("Elements : " + list);
             return list;
         }
+
         static void addIfAbsent(List<Integer> list, int x) {
             if (!list.contains(x)) {
                 validateRange(x);
@@ -93,6 +94,11 @@ public class IJ_Debugger_Advanced {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
+        }
+
+        @Test
+        public void main() throws InterruptedException {
+            Assertions.assertSame(1, work().size());
         }
     }
 
@@ -149,8 +155,10 @@ public class IJ_Debugger_Advanced {
             MethodBpt.BaseInterface o = Somewhere.getObject();
             System.out.println(o.boo());
         }
+
         public interface BaseInterface {
             String foo();
+
             String boo();
         }
     }
@@ -167,7 +175,7 @@ public class IJ_Debugger_Advanced {
         public static void main(String[] args) {
             FieldBpt field = new FieldBpt();
             Somewhere.doSomething(field);
-            if (field.var>5) {
+            if (field.var > 5) {
                 System.out.println("Big");
             }
         }
@@ -229,6 +237,36 @@ public class IJ_Debugger_Advanced {
         }
     }
 
-    
+    /**
+     * <h2>Advance stepping</h2>
+     * <li>Drop frame</li>
+     * <li>Force return</li>
+     * <li>Throw exception</li>
+     */
+    public static class Input {
+        public static void main(String[] args) throws IOException {
+            while (true) {
+                int read = System.in.read();
+                System.out.println("Input : " + read);
+                if (filter(read)) {
+                    process(read);
+                }
+            }
+        }
+        private static boolean filter(int read) {
+            return read != '\n' && read != 'a';
+        }
+
+        private static void process(int arg) {
+            arg = arg * 2;
+            arg += 4;
+            if (arg > 1) {
+                arg = Math.max(10, arg);
+            }
+            if (Math.max(arg, 90) % 2 == 0) {
+                System.out.println("!");
+            }
+        }
+    }
 
 }
