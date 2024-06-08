@@ -269,4 +269,43 @@ public class IJ_Debugger_Advanced {
         }
     }
 
+    /**
+     * <h2>Renders</h2>
+     * <li>Mute</li>
+     * <li>Settings</li>
+     * <li>Switch</li>
+     */
+    public static class Human2 {
+        private final String name;
+        private int age;
+
+        public Human2(String name) {
+            this.name = name;
+        }
+
+        public static void main(String[] args) {
+            List<Human2> all = Arrays.asList(new Man("Paul"), new Woman("Mary"), new Man("Max"));
+            for (int i = 0; i < 10; i++) {
+                for (Human2 human2 : all) {
+                    human2.inc();
+                }
+            }
+        }
+
+        private void inc() {
+            age++;
+        }
+
+        static class Man extends Human2 {
+            public Man(String name) {
+                super(name);
+            }
+        }
+
+        static class Woman extends Human2 {
+            public Woman(String name) {
+                super(name);
+            }
+        }
+    }
 }
