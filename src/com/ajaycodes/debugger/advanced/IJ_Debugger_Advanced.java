@@ -308,4 +308,30 @@ public class IJ_Debugger_Advanced {
             }
         }
     }
+
+    /**
+     * <h2>Renders</h2>
+     * <li>Custom Children</li>
+     * <li>Share with Annotation</li>
+     */
+    public static class Multimap<K, V> {
+
+        private final Map<K, Collection<V>> myMap = new HashMap<>();
+
+        public static void main(String[] args) {
+            Multimap<String, String> multimap = new Multimap<>();
+            multimap.add("A", "Apple");
+            multimap.add("B", "Book");
+            multimap.add("A", "Ape");
+            System.out.println(multimap);
+        }
+
+        void add(K key, V value) {
+            myMap.computeIfAbsent(key, k -> new ArrayList<>()).add(value);
+        }
+
+
+
+    }
+
 }
