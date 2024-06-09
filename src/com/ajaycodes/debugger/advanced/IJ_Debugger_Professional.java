@@ -32,4 +32,15 @@ public class IJ_Debugger_Professional {
             int a = 5;
         }
     }
+
+    /**
+     * <h2>Loose Ends</h2>
+     * <li>Renders for primitives and arrays (built and custom)</li>
+     */
+    public static class Primitives {
+        public static void main(String[] args) {
+            int a = 100;
+            System.out.println(a);
+        }
+    }
 }
